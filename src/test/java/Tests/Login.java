@@ -1,5 +1,6 @@
 package Tests;
 
+import BaseTest.BaseTest;
 import Pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,13 +8,16 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Demo {
+import java.io.IOException;
+
+public class Login extends BaseTest {
 
     WebDriver driver;
 
+
     @BeforeClass
     public void setUpDriver(){
-        driver = new ChromeDriver();
+        getBrowser(getBrowserName());
     }
 
     @Test

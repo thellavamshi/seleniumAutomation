@@ -32,5 +32,8 @@ public class LoginPage {
         userName.sendKeys("standard_user");
         password.sendKeys("secret_sauce");
         submit.click();
+        driver.manage().window().maximize();
+        driver.findElement(By.className(".product_sort_container")).click();
+        driver.findElement(By.cssSelector(".product_sort_container option[value='az']")).click();
     }
 }
