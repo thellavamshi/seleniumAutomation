@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="Regression Suite">
+    <test name="Regression Tests">
+        <groups>
+            <run>
+                <include name="Regression"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="Tests.GroupsDemo"></class>
+        </classes>
+    </test>
+</suite>

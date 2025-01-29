@@ -1,0 +1,10 @@
+[
+  {
+    "email" : "standard_user",
+    "password" : "secret_sauce"
+  },
+  {
+    "email" : "problem_user",
+    "password" : "secret_sauce"
+  }
+]
