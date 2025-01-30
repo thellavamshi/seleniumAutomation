@@ -8,6 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
@@ -16,6 +17,7 @@ import org.testng.annotations.BeforeMethod;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Properties;
 
 public abstract class BaseTest{
@@ -28,10 +30,20 @@ public abstract class BaseTest{
         Properties properties = new Properties();
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\globalData.properties");
         properties.load(fis);
-        String browser = properties.getProperty("browser").toLowerCase();
+
+        String browser =
+                System.getProperty("browser")!=null ?
+                System.getProperty("browser").toLowerCase() :
+                properties.getProperty("browser").toLowerCase();
+
+
         switch (browser){
             case "chrome":
-                driver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--disable-infobars");
+                options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
+                options.setExperimentalOption("useAutomationExtension", false);
+                driver = new ChromeDriver(options);
                 break;
             case "firefox" :
                 driver = new FirefoxDriver();
