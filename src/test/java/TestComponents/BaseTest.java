@@ -1,7 +1,8 @@
 package TestComponents;
 
-import AbstractComponents.AbstractComponent;
 import Pages.LoginPage;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -9,18 +10,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class BaseTest{
+public abstract class BaseTest{
 
     public WebDriver driver;
+    ExtentReports extentReports;
 
     public WebDriver initializeDriver() throws IOException {
 
@@ -49,25 +50,39 @@ public class BaseTest{
         return driver;
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void launchApplication() throws IOException {
+
+        String reportPath = System.getProperty("user.dir")+"//reports//index.html";
+        ExtentSparkReporter reporter = new ExtentSparkReporter(reportPath);
+        reporter.config().setReportName("Automation Report");
+        reporter.config().setDocumentTitle("Automation Document");
+
+        extentReports = new ExtentReports();
+        extentReports.attachReporter(reporter);
+        extentReports.setSystemInfo("Tester","Vamshi Thella");
+
+
+
         driver = initializeDriver();
         LoginPage lp = new LoginPage(driver);
         lp.launchUrl();
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown(){
         driver.quit();
     }
 
 
-    public void getScreenShot() throws IOException {
+    public String getScreenShot(String testCaseName, WebDriver driver) throws IOException {
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
         File destination =
-                new File(System.getProperty("user.dir")+"//reports//"  + ".png");
+                new File(System.getProperty("user.dir")+"//screenshots//"+testCaseName+".png");
         FileUtils.copyFile(source, destination);
+        return System.getProperty("user.dir")+"//screenshots//"+testCaseName+".png";
     }
+
 
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="Basic Suite">
+    <listeners>
+        <listener class-name="TestComponents.Listeners"/>
+    </listeners>
+    <test name="Basic Test 1">
+        <classes>
+            <class name="Tests.Test1"/>
+        </classes>
+    </test>
+    <test name="Basic Test 2">
+        <classes>
+            <class name="Tests.Test2"/>
+        </classes>
+    </test>
+</suite>

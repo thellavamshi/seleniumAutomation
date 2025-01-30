@@ -3,6 +3,7 @@ package Tests;
 import Data.JsonDataReader;
 import Pages.LoginPage;
 import TestComponents.BaseTest;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -68,4 +69,6 @@ public class LoginTest extends BaseTest {
                 {map.get(1)}
         };
     }
+
+
 }

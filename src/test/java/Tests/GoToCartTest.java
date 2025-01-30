@@ -3,6 +3,7 @@ package Tests;
 import Pages.LoginPage;
 import Pages.ProductCatalougePage;
 import TestComponents.BaseTest;
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -22,4 +23,6 @@ public class GoToCartTest extends BaseTest {
         ProductCatalougePage pc = new ProductCatalougePage(driver);
         pc.clickCart();
     }
+
+
 }
